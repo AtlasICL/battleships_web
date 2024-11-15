@@ -22,6 +22,8 @@ def place_battleships(board: list[list], ships: dict[str, int]) -> list[list]:
         for x in range(ship_size):
             board[row][x] = ship_name
         row += 1
+        # NOTE: board[row] could raise index error
+        # but I think here we are safe becase of the assert above
 
     print_board(board)
 
