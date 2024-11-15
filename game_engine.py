@@ -13,7 +13,9 @@ def attack(coordinates: tuple, board: list[list], battleships: dict[str, int]) -
     return hit_success
 
 def cli_coordinates_input() -> tuple:
-    pass
+    x = input("Please enter x coordinate --> ")
+    y = input("Please enter y coordinate --> ")
+    return (x, y)
 
 def simple_game_loop():
     pass
