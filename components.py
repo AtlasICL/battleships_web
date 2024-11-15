@@ -1,4 +1,5 @@
-from utils import print_board
+# from utils import print_board
+# from game_engine import ship_exists
 
 def initialise_board(size: int =10) -> list[list]:
     empty_board = [[None for _ in range(size)] for _ in range(size)]
@@ -12,7 +13,7 @@ def create_battleships(filename: str ="battleships.txt") -> dict[str, int]:
             battleships[ship_name] = int(ship_size)
     return battleships
 
-def place_battleships(board: list[list], ships: dict[str, int]) -> list[list]:
+def place_battleships(board: list[list], ships: dict[str, int], algorithm = "simple") -> list[list]:
     assert len(ships) <= len(board), "TOO MANY SHIPS"
     for ship_size in ships.values():
         assert ship_size <= len(board), "SHIP TOO BIG"
@@ -24,17 +25,13 @@ def place_battleships(board: list[list], ships: dict[str, int]) -> list[list]:
         row += 1
         # NOTE: board[row] could raise index error
         # but I think here we are safe becase of the assert above
-
-    print_board(board)
-
+    return board
 
     
-
 def main():
-    board: list[list] = initialise_board()
-    ships: dict[str: int] = create_battleships()
+    board = initialise_board(10)
+    ships = create_battleships()
     board = place_battleships(board, ships)
-    
 
 if __name__ == "__main__":
     main()
