@@ -4,8 +4,13 @@ def ship_exists(coordinates: tuple, board: list[list]) -> bool:
         return True
     return False
 
-def attack(coordinates: tuple, board: list[list], battleships) -> bool:
-    pass
+def attack(coordinates: tuple, board: list[list], battleships: dict[str, int]) -> bool:
+    x, y = coordinates
+    hit_success: bool = ship_exists((x, y), board)
+    if hit_success:
+        battleships[board[y][x]] -= 1
+        board[y][x] = None
+    return hit_success
 
 def cli_coordinates_input() -> tuple:
     pass
