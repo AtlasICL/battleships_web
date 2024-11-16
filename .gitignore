@@ -1,2 +1,12 @@
-src/__pycache__
-testing
+*
+
+!README.md
+!.gitignore
+
+!config/
+
+!src/components.py
+!src/game_engine.py
+!src/mp_game_engine.py
+!src/main.py
+
