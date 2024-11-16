@@ -34,7 +34,13 @@ This configuration will place 4 ships on the board, of sizes 1, 3, 4, and 2 resp
 In order to **specify your ship placement** when playing against the AI opponent, please configure the **`config/placements.json`** file.  
 Example file:
 ```
-{}
+{
+  "Aircraft_Carrier":["0","0","h"],
+  "Battleship":["2","2","v"],
+  "Cruiser":["4","4","h"],
+  "Submarine":["6","6","v"],
+  "Destroyer":["8","8","h"]
+}
 ```
 
 ---
