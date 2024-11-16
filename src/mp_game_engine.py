@@ -20,14 +20,23 @@ def get_board_size() -> int:
     assert board_size > 0, "BOARD LEN 0"
     return board_size
 
+# TODO: implement this?
+def initialise_players_dict():
+    pass
+
+def display_mp_welcome() -> None:
+    print("Welcome to battleships game")
+
 def generate_attack() -> tuple:
     board_size: int = get_board_size()
     attack_x: int = random.randint(0, board_size-1)
     attack_y: int = random.randint(0, board_size-1)
     return (attack_x, attack_y)
 
-def ai_opponent_game_loop(): 
-    pass
+def ai_opponent_game_loop():
+    display_mp_welcome()
+    
+    
 
 def main():
     a, b = generate_attack()
