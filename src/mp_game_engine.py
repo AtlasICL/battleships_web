@@ -1,13 +1,13 @@
 import random
 
 players = {
-    "Emre": {
-        "board": [[None, None], [None, None]],
-        "ships": {"s1": 0, "s2": 0}
+    "user": {
+        "board": [],
+        "ships": {}
     },
-    "Julia": {
-        "board": [['s1', 's1'], ['s2', None]],
-        "ships": {"s1": 2, "s2": 1}
+    "ai": {
+        "board": [],
+        "ships": {}
     }
 }
 
@@ -20,8 +20,8 @@ def get_board_size() -> int:
     assert board_size > 0, "BOARD LEN 0"
     return board_size
 
-# TODO: implement this?
-def initialise_players_dict():
+def initialise_players_dict(placements_filepath: str ="config/placements.json") -> dict[str, dict]:
+
     pass
 
 def display_mp_welcome() -> None:
@@ -35,6 +35,8 @@ def generate_attack() -> tuple:
 
 def ai_opponent_game_loop():
     display_mp_welcome()
+    players = initialise_players_dict()
+
     
     
 
