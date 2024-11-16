@@ -5,7 +5,7 @@ def initialise_board(size: int =10) -> list[list]:
     empty_board = [[None for _ in range(size)] for _ in range(size)]
     return empty_board
 
-def create_battleships(filename: str ="config/battleships.txt") -> dict[str, int]:
+def create_battleships(filename: str ="battleships.txt") -> dict[str, int]:
     battleships: dict = {} 
     with open(filename, 'r') as ifstream:
         for line in ifstream:

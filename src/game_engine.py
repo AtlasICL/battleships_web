@@ -29,10 +29,21 @@ def is_all_ships_sunk(ships: dict[str, int]) -> bool:
             all_nil = False
     return all_nil
 
+def char_ship_type(ship_in) -> str:
+    abbreviations = {
+        'Aircraft_Carrier': 'A',
+        'Battleship': 'B',
+        'Cruiser': 'C',
+        'Submarine': 'S',
+        'Destroyer': 'D',
+        None: '-'
+    }
+    return abbreviations[ship_in]
+
 def print_board(board: list[list[str | None]]) -> None:
     print(f"BOARD OF SIZE {len(board)}x{len(board[0])}")
     for y in range(len(board)):
-        print(board[y])
+        print(f"{[char_ship_type(board[y][x]) for x in range(len(board[y]))]}")
 
 def simple_game_loop() -> None:
     display_welcome_message()

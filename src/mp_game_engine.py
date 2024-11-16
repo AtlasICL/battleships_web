@@ -11,6 +11,14 @@ players = {
     }
 }
 
+# NOTE
+# DONT USE BATTLESHIPS.TXT FOR SHIP SIZE
+# JUST CREATE A DICTIONARY WITH THE SIZES IN THIS FILE
+# BATTLESHIPS.TXT IS TO CONFIGURE THE SINGLEPLAYER VERSION
+# I THINK
+
+
+
 # this function assumes that board size for the first player
 # is the universal board size
 def get_board_size() -> int:
@@ -41,8 +49,7 @@ def ai_opponent_game_loop():
     
 
 def main():
-    a, b = generate_attack()
-    print(a, b)
+    ...
 
 if __name__ == "__main__":
     main()
