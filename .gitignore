@@ -1,12 +1,1 @@
-*
-
-!.gitignore
-!battleships.txt
-!README.md
-
-!src/components.py
-!src/game_engine.py
-!src/mp_game_engine.py
-!src/main.py
-
-!config/placement.json
+src/__pycache__
