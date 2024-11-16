@@ -1,5 +1,4 @@
 import components
-import debug
 
 def ship_exists(coordinates: tuple, board: list[list]) -> bool:
     x, y = coordinates
