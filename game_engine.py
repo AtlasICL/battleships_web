@@ -1,6 +1,6 @@
 import components
 
-def ship_exists(coordinates: tuple, board: list[list]) -> bool:
+def ship_exists(coordinates: tuple, board: list[list[str | None]]) -> bool:
     x, y = coordinates
     if board[y][x] is not None:
         return True
@@ -9,7 +9,7 @@ def ship_exists(coordinates: tuple, board: list[list]) -> bool:
 def display_welcome_message() -> None:
     print("Welcome to Battleships game")
 
-def attack(coordinates: tuple, board: list[list], battleships: dict[str, int]) -> bool:
+def attack(coordinates: tuple, board: list[list[str | None]], battleships: dict[str, int]) -> bool:
     x, y = coordinates
     hit_success: bool = ship_exists((x, y), board)
     if hit_success:
@@ -29,7 +29,7 @@ def is_all_ships_sunk(ships: dict[str, int]) -> bool:
             all_nil = False
     return all_nil
 
-def print_board(board: list[list]) -> None:
+def print_board(board: list[list[str | None]]) -> None:
     print(f"BOARD OF SIZE {len(board)}x{len(board[0])}")
     for y in range(len(board)):
         print(board[y])
