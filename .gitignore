@@ -9,6 +9,4 @@
 !src/mp_game_engine.py
 !src/main.py
 
-!config/
-
-
+!config/placement.json
