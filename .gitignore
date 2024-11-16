@@ -4,6 +4,8 @@
 !battleships.txt
 !README.md
 
+!src
+
 !components.py
 !game_engine.py
 !mp_game_engine.py
