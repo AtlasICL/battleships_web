@@ -1,1 +1,12 @@
-__pycache__/
+*
+
+!.gitignore
+!battleships.txt
+!README.md
+
+!components.py
+!game_engine.py
+!mp_game_engine.py
+!main.py
+
+
