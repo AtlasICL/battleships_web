@@ -2,7 +2,7 @@ import components
 import debug
 
 def ship_exists(coordinates: tuple, board: list[list]) -> bool:
-    y, x = coordinates
+    x, y = coordinates
     if board[y][x] is not None:
         return True
     return False
@@ -23,15 +23,34 @@ def cli_coordinates_input() -> tuple:
     y = int(input("Please enter y coordinate --> "))
     return (x, y)
 
-def simple_game_loop():
+def is_all_ships_sunk(ships: dict[str, int]) -> bool:
+    all_nil = True
+    for ship_length in ships.values():
+        if ship_length > 0:
+            all_nil = False
+    return all_nil
+
+def print_board(board: list[list]) -> None:
+    print(f"BOARD OF SIZE {len(board)}x{len(board[0])}")
+    for y in range(len(board)):
+        print(board[y])
+
+def simple_game_loop() -> None:
     display_welcome_message()
     board = components.initialise_board(5)
     ships = components.create_battleships()
     board = components.place_battleships(board, ships)
-    while True:
-        debug.print_board(board)
+
+    all_ships_sunk: bool = is_all_ships_sunk(ships)
+    
+    while not all_ships_sunk:
+        print_board(board)
         (x, y) = cli_coordinates_input()
         attack((x, y), board, ships)
+        all_ships_sunk = is_all_ships_sunk(ships)
+
+    print("game over")
+        
     
 
 if __name__ == "__main__":
