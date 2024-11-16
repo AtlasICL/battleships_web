@@ -4,6 +4,7 @@
 !.gitignore
 
 !config/
+!battleships.txt
 
 !src/components.py
 !src/game_engine.py
