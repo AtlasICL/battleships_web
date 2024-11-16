@@ -4,8 +4,11 @@
 !battleships.txt
 !README.md
 
-!src
+!src/components.py
+!src/game_engine.py
+!src/mp_game_engine.py
+!src/main.py
 
-!config
+!config/
 
 
