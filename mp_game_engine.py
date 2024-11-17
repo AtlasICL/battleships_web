@@ -27,14 +27,16 @@ def initialise_players_dict(placements_filepath: str ="placement.json") -> dict[
     user_board = components.make_custom_board(placements_filepath)
     player_ships = components.get_player_ships(placements_filepath)
 
+    ai_opponent_board = components.make_random_board()
+
     players = {
         "user": {
             "board": user_board,
             "ships": player_ships
         },
         "ai": {
-            "board": [],
-            "ships": {}
+            "board": ai_opponent_board,
+            "ships": player_ships
         }
     }
     return players
@@ -43,6 +45,7 @@ def ai_opponent_game_loop():
     display_mp_welcome()
     global players
     players = initialise_players_dict()
+
 
 
 def main():

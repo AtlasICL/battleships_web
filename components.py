@@ -1,4 +1,5 @@
 import json
+import random
 
 SHIP_SIZES = {
     "Aircraft_Carrier": 5,
@@ -47,11 +48,12 @@ def place_battleships(board: list[list], ships: dict[str, int], algorithm="simpl
             for x in range(ship_size):
                 board[row][x] = ship_name
             row += 1
-            # NOTE: board[row] could raise index error
-            # but I think here we are safe becase of the assert above
         return board
     elif algorithm == "custom":
         board = make_custom_board("placement.json")
+        return board
+    elif algorithm == "random":
+        board = make_random_board(ships)
         return board
 
 def load_placements_from_json(filename):
@@ -72,11 +74,53 @@ def make_custom_board(filename) -> list[list[str | None]]:
             x_iter = 1
         if placement[2] == 'v':
             y_iter = 1
-            
         for i in range(SHIP_SIZES[ship]):
             board[start_y + i * y_iter][start_x + i * x_iter] = ship
-
     return board
+
+def make_random_board() -> list[list[str | None]]:
+    board = initialise_board()
+    ships_to_place = []
+    with open("placement.json", 'r') as ifstream:
+        ships_placed_by_player = json.load(ifstream)
+        ships_to_place = list(ships_placed_by_player.keys())
+
+    for ship_name in ships_to_place:
+        ship_length = SHIP_SIZES[ship_name]
+        place_ship(board, ship_length, ship_name)
+
+    print_board(board)
+    return board
+
+def place_ship(board, ship_length, ship_name):
+    placed = False
+    while not placed:
+        start_y = random.randint(0, len(board)-1)
+        start_x = random.randint(0, len(board)-1)
+        direction = random.choice(['h', 'v'])
+        if can_place_ship(board, ship_length, start_x, start_y, direction):
+            if direction == 'h':
+                for i in range(ship_length):
+                    board[start_y][start_x + i] = ship_name
+            elif direction == 'v':
+                for i in range(ship_length):
+                    board[start_y + i][start_x] = ship_name
+            placed = True
+
+def can_place_ship(board: list[list], ship_length, start_x, start_y, direction):
+    if direction == 'h':
+        if start_x + ship_length > len(board):
+            return False
+        for i in range(ship_length):
+            if board[start_y][start_x + i] is not None:
+                return False
+    elif direction == 'v':
+        if start_y + ship_length > len(board):
+            return False
+        for i in range(ship_length):
+            if board[start_y + i][start_x] is not None:
+                return False
+    return True
 
 def get_player_ships(filepath):
     output: dict[str, int] = {}
@@ -88,7 +132,8 @@ def get_player_ships(filepath):
     
 def main():
     # shouldn't be running this file
-    return
+    make_random_board()
+    pass
 
 if __name__ == "__main__":
     main()
