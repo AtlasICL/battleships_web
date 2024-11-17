@@ -8,6 +8,22 @@ SHIP_SIZES = {
     "Destroyer": 2
 }
 
+def char_ship_type(ship_in) -> str:
+    abbreviations = {
+        'Aircraft_Carrier': 'A',
+        'Battleship': 'B',
+        'Cruiser': 'C',
+        'Submarine': 'S',
+        'Destroyer': 'D',
+        None: '-'
+    }
+    return abbreviations[ship_in]
+
+def print_board(board: list[list[str | None]]) -> None:
+    print(f"BOARD OF SIZE {len(board)}x{len(board[0])}")
+    for y in range(len(board)):
+        print(f"{[char_ship_type(board[y][x]) for x in range(len(board[y]))]}")
+
 def initialise_board(size: int =10) -> list[list]:
     empty_board = [[None for _ in range(size)] for _ in range(size)]
     return empty_board
@@ -20,19 +36,23 @@ def create_battleships(filename: str ="battleships.txt") -> dict[str, int]:
             battleships[ship_name] = int(ship_size)
     return battleships
 
-def place_battleships(board: list[list], ships: dict[str, int], algorithm = "simple") -> list[list]:
-    assert len(ships) <= len(board), "TOO MANY SHIPS"
-    for ship_size in ships.values():
-        assert ship_size <= len(board), "SHIP TOO BIG"
-    
-    row: int = 0
-    for ship_name, ship_size in ships.items():
-        for x in range(ship_size):
-            board[row][x] = ship_name
-        row += 1
-        # NOTE: board[row] could raise index error
-        # but I think here we are safe becase of the assert above
-    return board
+def place_battleships(board: list[list], ships: dict[str, int], algorithm="simple") -> list[list]:
+    if algorithm == "simple":
+        assert len(ships) <= len(board), "TOO MANY SHIPS"
+        for ship_size in ships.values():
+            assert ship_size <= len(board), "SHIP TOO BIG"
+        
+        row: int = 0
+        for ship_name, ship_size in ships.items():
+            for x in range(ship_size):
+                board[row][x] = ship_name
+            row += 1
+            # NOTE: board[row] could raise index error
+            # but I think here we are safe becase of the assert above
+        return board
+    if algorithm == "custom":
+        board = make_custom_board("placement.json")
+        return board
 
 def load_placements_from_json(filename):
     with open(filename, 'r') as ifstream:
@@ -70,6 +90,8 @@ def main():
     board = initialise_board(10)
     ships = create_battleships()
     board = place_battleships(board, ships)
+
+    print_board(board)
 
 if __name__ == "__main__":
     main()
