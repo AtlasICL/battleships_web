@@ -5,9 +5,10 @@
 
 !config/
 !battleships.txt
+!placement.json
 
-!src/components.py
-!src/game_engine.py
-!src/mp_game_engine.py
-!src/main.py
+!components.py
+!game_engine.py
+!mp_game_engine.py
+!main.py
 
