@@ -1,5 +1,12 @@
-# from utils import print_board
-# from game_engine import ship_exists
+import json
+
+SHIP_SIZES = {
+    "Aircraft_Carrier": 5,
+    "Battleship": 4,
+    "Cruiser": 3,
+    "Submarine": 3,
+    "Destroyer": 2
+}
 
 def initialise_board(size: int =10) -> list[list]:
     empty_board = [[None for _ in range(size)] for _ in range(size)]
@@ -27,6 +34,37 @@ def place_battleships(board: list[list], ships: dict[str, int], algorithm = "sim
         # but I think here we are safe becase of the assert above
     return board
 
+def load_placements_from_json(filename):
+    with open(filename, 'r') as ifstream:
+        placement_data = json.load(ifstream)
+    return placement_data
+
+def make_custom_board(filename) -> list[list[str | None]]:
+    placement_data = load_placements_from_json(filename)
+    board = initialise_board()
+    
+    for ship, placement in placement_data.items():
+        start_y = int(placement[1])
+        start_x = int(placement[0])
+        y_iter = 0
+        x_iter = 0
+        if placement[2] == 'h':
+            x_iter = 1
+        if placement[2] == 'v':
+            y_iter = 1
+            
+        for i in range(SHIP_SIZES[ship]):
+            board[start_y + i * y_iter][start_x + i * x_iter] = ship
+
+    return board
+
+def get_player_ships(filepath):
+    output: dict[str, int] = {}
+    with open(filepath, 'r') as ifstream:
+        placement_data = json.load(ifstream)
+        for ship_name in placement_data:
+            output[ship_name] = SHIP_SIZES[ship_name]
+    return output
     
 def main():
     board = initialise_board(10)
