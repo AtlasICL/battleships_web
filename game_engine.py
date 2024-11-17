@@ -9,17 +9,21 @@ def ship_exists_at_coords(coordinates: tuple, board: list[list[str | None]]) -> 
 def display_welcome_message() -> None:
     print("Welcome to Battleships game")
 
+def display_hit_miss_msg(hit_success: bool) -> None:
+    print("HIT!" if hit_success else "MISS!")
+
 def attack(coordinates: tuple, board: list[list[str | None]], battleships: dict[str, int]) -> bool:
     x, y = coordinates
     hit_success: bool = ship_exists_at_coords((x, y), board)
     if hit_success:
         battleships[board[y][x]] -= 1
         board[y][x] = None
+    display_hit_miss_msg(hit_success)
     return hit_success
 
 def cli_coordinates_input() -> tuple:
-    x = int(input("Please enter x coordinate --> "))
-    y = int(input("Please enter y coordinate --> "))
+    x = int(input("Please enter *X* coordinate --> "))
+    y = int(input("Please enter *Y* coordinate --> "))
     return (x, y)
 
 def is_all_ships_sunk(ships: dict[str, int]) -> bool:

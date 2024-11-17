@@ -1,8 +1,7 @@
 import random
 import json
 
-import components
-import game_engine
+import components, game_engine
 
 players = {}
 
@@ -42,15 +41,38 @@ def initialise_players_dict(placements_filepath: str ="placement.json") -> dict[
     return players
 
 def ai_opponent_game_loop():
-    display_mp_welcome()
+
     global players
     players = initialise_players_dict()
+
+    display_mp_welcome()
+
+    all_user_ships_sunk = False
+    all_ai_ships_sunk = False
+
+    while not all_user_ships_sunk and not all_ai_ships_sunk:
+
+        (x, y) = game_engine.cli_coordinates_input()
+        game_engine.attack((x, y), players["ai"]["board"], players["ai"]["ships"])
+
+        (x, y) = generate_attack()
+        game_engine.attack((x, y), players["user"]["board"], players["user"]["ships"])
+
+        components.print_board(players["user"]["board"])
+        components.print_board(players["ai"]["board"])
+
+        all_user_ships_sunk = game_engine.is_all_ships_sunk(players["user"]["ships"])
+        all_ai_ships_sunk = game_engine.is_all_ships_sunk(players["ai"]["ships"])
+    
+    
+    
+
+
 
 
 
 def main():
     ai_opponent_game_loop()
-    print(players)
 
 if __name__ == "__main__":
     main()

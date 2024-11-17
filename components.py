@@ -42,7 +42,6 @@ def place_battleships(board: list[list], ships: dict[str, int], algorithm="simpl
         assert len(ships) <= len(board), "TOO MANY SHIPS"
         for ship_size in ships.values():
             assert ship_size <= len(board), "SHIP TOO BIG"
-        
         row: int = 0
         for ship_name, ship_size in ships.items():
             for x in range(ship_size):
@@ -92,7 +91,7 @@ def make_random_board() -> list[list[str | None]]:
     print_board(board)
     return board
 
-def place_ship(board, ship_length, ship_name):
+def place_ship(board, ship_length, ship_name) -> None:
     placed = False
     while not placed:
         start_y = random.randint(0, len(board)-1)
