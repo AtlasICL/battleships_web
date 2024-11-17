@@ -50,7 +50,7 @@ def place_battleships(board: list[list], ships: dict[str, int], algorithm="simpl
             # NOTE: board[row] could raise index error
             # but I think here we are safe becase of the assert above
         return board
-    if algorithm == "custom":
+    elif algorithm == "custom":
         board = make_custom_board("placement.json")
         return board
 
@@ -87,11 +87,8 @@ def get_player_ships(filepath):
     return output
     
 def main():
-    board = initialise_board(10)
-    ships = create_battleships()
-    board = place_battleships(board, ships)
-
-    print_board(board)
+    # shouldn't be running this file
+    return
 
 if __name__ == "__main__":
     main()
