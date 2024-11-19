@@ -5,18 +5,16 @@ import components, game_engine
 
 players = {}
 
-def get_board_size() -> int:
-    assert len(players) > 0, "EMPTY PLAYER LIST"
-    first_player = next(iter(players))
-    board_size: int = len(players[first_player]["board"])
+def get_board_size(board) -> int:
+    board_size: int = len(board)
     assert board_size > 0, "BOARD LEN 0"
     return board_size
 
 def display_mp_welcome() -> None:
     print("Welcome to battleships game")
 
-def generate_attack() -> tuple:
-    board_size: int = get_board_size()
+def generate_attack(board) -> tuple:
+    board_size: int = get_board_size(board)
     attack_x: int = random.randint(0, board_size-1)
     attack_y: int = random.randint(0, board_size-1)
     return (attack_x, attack_y)
@@ -55,7 +53,7 @@ def ai_opponent_game_loop():
         (x, y) = game_engine.cli_coordinates_input()
         game_engine.attack((x, y), players["ai"]["board"], players["ai"]["ships"])
 
-        (x, y) = generate_attack()
+        (x, y) = generate_attack(players["user"]["board"])
         game_engine.attack((x, y), players["user"]["board"], players["user"]["ships"])
 
         components.print_board(players["user"]["board"])

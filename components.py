@@ -79,6 +79,22 @@ def make_custom_board(filename) -> list[list[str | None]]:
             board[start_y + i * y_iter][start_x + i * x_iter] = ship
     return board
 
+def make_custom_board_from_json(user_ship_placement) -> list[list[str | None]]:
+    board = initialise_board()
+    for ship, placement in user_ship_placement.items():
+        start_y = int(placement[1])
+        start_x = int(placement[0])
+        y_iter = 0
+        x_iter = 0
+        if placement[2] == 'h':
+            x_iter = 1
+        if placement[2] == 'v':
+            y_iter = 1
+        for i in range(SHIP_SIZES[ship]):
+            board[start_y + i * y_iter][start_x + i * x_iter] = ship
+    return board
+
+
 def make_random_board() -> list[list[str | None]]:
     board = initialise_board()
     ships_to_place = []
