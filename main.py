@@ -60,7 +60,7 @@ def attack():
     
     return jsonify({'hit': False,
         'AI_Turn': (0,0),
-        'finished': "GAME OVER"
+        'finished': "PLAYER WINS" if all_ai_ships_sunk else "AI WINS"
         })
     
 
