@@ -14,8 +14,6 @@ battleships = components.create_battleships()
 
 @app.route('/', methods=['GET'])
 def render_main():
-    placement_interface()
-    global players
     return render_template('main.html', player_board=players['user']['board'])
 
 
@@ -23,9 +21,7 @@ def render_main():
 def placement_interface():
     if request.method == 'POST':
         user_ship_placement_data = request.get_json()
-        global players
         players["user"]["board"] = components.make_custom_board_from_json(user_ship_placement_data)
-        print(user_ship_placement_data)
         return jsonify({'message': 'Received'}), 200
 
     global battleships
@@ -35,13 +31,12 @@ def placement_interface():
 @app.route('/attack', methods=['GET'])
 def attack():
 
+    # fetching user input coordinates
     x = int(request.args.get('x'))
     y = int(request.args.get('y'))
 
     
     global players
-    global all_user_ships_sunk
-    global all_ai_ships_sunk
 
     all_user_ships_sunk = game_engine.is_all_ships_sunk(players["user"]["ships"])
     all_ai_ships_sunk = game_engine.is_all_ships_sunk(players["ai"]["ships"])
@@ -49,9 +44,6 @@ def attack():
     if not all_user_ships_sunk and not all_ai_ships_sunk:
         hit_success = game_engine.attack((x, y), players["ai"]["board"], players["ai"]["ships"])
         ai_attack = mp_game_engine.generate_attack(players["user"]["board"])
-
-        print(hit_success)
-        print(ai_attack)
 
         return jsonify({'hit': hit_success,
             'AI_Turn': ai_attack,
