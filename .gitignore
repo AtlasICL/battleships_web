@@ -7,6 +7,8 @@
 !battleships.txt
 !placement.json
 
+!templates/
+
 !components.py
 !game_engine.py
 !mp_game_engine.py
