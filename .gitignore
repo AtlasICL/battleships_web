@@ -1,16 +1,3 @@
-*
-
-!README.md
-!.gitignore
-
-!config/
-!battleships.txt
-!placement.json
-
-!templates/
-
-!components.py
-!game_engine.py
-!mp_game_engine.py
-!main.py
+venv/
+__pycache__/
 
