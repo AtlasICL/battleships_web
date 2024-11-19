@@ -1,6 +1,8 @@
 import json
 import random
 
+# TODO: dont define this, instead read it in from battleships.txt
+# battleships defines which ships are in play (in general)
 SHIP_SIZES = {
     "Aircraft_Carrier": 5,
     "Battleship": 4,
