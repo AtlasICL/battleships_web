@@ -3,13 +3,13 @@ import random
 
 # TODO: dont define this, instead read it in from battleships.txt
 # battleships defines which ships are in play (in general)
-SHIP_SIZES = {
-    "Aircraft_Carrier": 5,
-    "Battleship": 4,
-    "Cruiser": 3,
-    "Submarine": 3,
-    "Destroyer": 2
-}
+# SHIP_SIZES = {
+#     "Aircraft_Carrier": 5,
+#     "Battleship": 4,
+#     "Cruiser": 3,
+#     "Submarine": 3,
+#     "Destroyer": 2
+# }
 
 def char_ship_type(ship_in) -> str:
     abbreviations = {
@@ -65,6 +65,7 @@ def load_placements_from_json(filename):
 def make_custom_board(filename) -> list[list[str | None]]:
     placement_data = load_placements_from_json(filename)
     board = initialise_board()
+    ship_sizes = create_battleships()
     
     for ship, placement in placement_data.items():
         start_y = int(placement[1])
@@ -75,12 +76,13 @@ def make_custom_board(filename) -> list[list[str | None]]:
             x_iter = 1
         if placement[2] == 'v':
             y_iter = 1
-        for i in range(SHIP_SIZES[ship]):
+        for i in range(ship_sizes[ship]):
             board[start_y + i * y_iter][start_x + i * x_iter] = ship
     return board
 
 def make_custom_board_from_json(user_ship_placement) -> list[list[str | None]]:
     board = initialise_board()
+    ship_sizes = create_battleships()
     for ship, placement in user_ship_placement.items():
         start_y = int(placement[1])
         start_x = int(placement[0])
@@ -90,20 +92,21 @@ def make_custom_board_from_json(user_ship_placement) -> list[list[str | None]]:
             x_iter = 1
         if placement[2] == 'v':
             y_iter = 1
-        for i in range(SHIP_SIZES[ship]):
+        for i in range(ship_sizes[ship]):
             board[start_y + i * y_iter][start_x + i * x_iter] = ship
     return board
 
 
 def make_random_board() -> list[list[str | None]]:
     board = initialise_board()
+    ship_sizes = create_battleships()
     ships_to_place = []
     with open("placement.json", 'r') as ifstream:
         ships_placed_by_player = json.load(ifstream)
         ships_to_place = list(ships_placed_by_player.keys())
 
     for ship_name in ships_to_place:
-        ship_length = SHIP_SIZES[ship_name]
+        ship_length = ship_sizes[ship_name]
         place_ship(board, ship_length, ship_name)
 
     return board
@@ -138,18 +141,20 @@ def can_place_ship(board: list[list], ship_length, start_x, start_y, direction):
                 return False
     return True
 
-def get_player_ships(filepath):
-    output: dict[str, int] = {}
-    with open(filepath, 'r') as ifstream:
-        placement_data = json.load(ifstream)
-        for ship_name in placement_data:
-            output[ship_name] = SHIP_SIZES[ship_name]
-    return output
+
+# SHOULD BE GETTING THIS FROM BATTLESHIPS.TXT
+# FUNCTION SHOULD BE USELESS - KEEPING FOR NOW IF NEEDED
+# def get_player_ships(filepath):
+#     output: dict[str, int] = {}
+#     with open(filepath, 'r') as ifstream:
+#         placement_data = json.load(ifstream)
+#         for ship_name in placement_data:
+#             output[ship_name] = SHIP_SIZES[ship_name]
+#     return output
     
 def main():
     # shouldn't be running this file
-    make_random_board()
-    pass
+    return
 
 if __name__ == "__main__":
     main()
