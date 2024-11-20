@@ -4,7 +4,6 @@ import components, game_engine, mp_game_engine
 
 app = Flask(__name__)
 
-players = {}
 players = mp_game_engine.initialise_players_dict()
 
 all_user_ships_sunk: bool = False
