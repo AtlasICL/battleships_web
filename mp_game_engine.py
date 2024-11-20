@@ -1,5 +1,4 @@
 import random
-import json
 
 import components, game_engine
 
@@ -13,6 +12,12 @@ def get_board_size(board) -> int:
 def display_mp_welcome() -> None:
     print("Welcome to battleships game")
 
+def display_player_win_msg() -> None:
+    print("Player wins!")
+
+def display_ai_win_msg() -> None:
+    print("Computer wins!")
+
 def generate_attack(board) -> tuple:
     board_size: int = get_board_size(board)
     attack_x: int = random.randint(0, board_size-1)
@@ -22,7 +27,7 @@ def generate_attack(board) -> tuple:
 
 def initialise_players_dict(placements_filepath: str ="placement.json") -> dict[str, dict]:
     user_board = components.make_custom_board(placements_filepath)
-    player_ships = components.get_player_ships(placements_filepath)
+    player_ships = components.create_battleships()
 
     ai_opponent_board = components.make_random_board()
 
@@ -45,6 +50,14 @@ def ai_opponent_game_loop():
 
     display_mp_welcome()
 
+    # TODO: dont show the user the AI board
+    # just say hit or miss
+
+    # Make sure when HIT or MISS appear, we know whether its for the AI 
+    # or for the player
+    # alternatively just don't tell the player whether the AI got a hit
+    # they can see it on their board anyways
+
     all_user_ships_sunk = False
     all_ai_ships_sunk = False
 
@@ -61,13 +74,14 @@ def ai_opponent_game_loop():
 
         all_user_ships_sunk = game_engine.is_all_ships_sunk(players["user"]["ships"])
         all_ai_ships_sunk = game_engine.is_all_ships_sunk(players["ai"]["ships"])
+
+    if all_user_ships_sunk:
+        display_ai_win_msg()
+    elif all_ai_ships_sunk:
+        display_player_win_msg()
+
     
     
-    
-
-
-
-
 
 def main():
     ai_opponent_game_loop()

@@ -106,7 +106,6 @@ def make_random_board() -> list[list[str | None]]:
         ship_length = SHIP_SIZES[ship_name]
         place_ship(board, ship_length, ship_name)
 
-    print_board(board)
     return board
 
 def place_ship(board, ship_length, ship_name) -> None:

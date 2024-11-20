@@ -23,7 +23,6 @@ def placement_interface():
         players["user"]["board"] = components.make_custom_board_from_json(user_ship_placement_data)
         return jsonify({'message': 'Received'}), 200
 
-    global battleships
     return render_template('placement.html', ships=battleships, board_size=10)
 
 
@@ -45,8 +44,7 @@ def attack():
         ai_attack = mp_game_engine.generate_attack(players["user"]["board"])
 
         return jsonify({'hit': hit_success,
-            'AI_Turn': ai_attack,
-            'finished': "NEXT TURN"
+            'AI_Turn': ai_attack
             })
     
     return jsonify({'hit': False,
@@ -59,5 +57,6 @@ def attack():
 
 if __name__ == "__main__":
     app.run()
+
 
 
