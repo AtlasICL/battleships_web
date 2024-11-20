@@ -1,16 +1,7 @@
 import json
 import random
 
-# TODO: dont define this, instead read it in from battleships.txt
-# battleships defines which ships are in play (in general)
-# SHIP_SIZES = {
-#     "Aircraft_Carrier": 5,
-#     "Battleship": 4,
-#     "Cruiser": 3,
-#     "Submarine": 3,
-#     "Destroyer": 2
-# }
-
+# this function is for more readable printing of the board
 def char_ship_type(ship_in) -> str:
     abbreviations = {
         'Aircraft_Carrier': 'A',
@@ -141,16 +132,6 @@ def can_place_ship(board: list[list], ship_length, start_x, start_y, direction):
                 return False
     return True
 
-
-# SHOULD BE GETTING THIS FROM BATTLESHIPS.TXT
-# FUNCTION SHOULD BE USELESS - KEEPING FOR NOW IF NEEDED
-# def get_player_ships(filepath):
-#     output: dict[str, int] = {}
-#     with open(filepath, 'r') as ifstream:
-#         placement_data = json.load(ifstream)
-#         for ship_name in placement_data:
-#             output[ship_name] = SHIP_SIZES[ship_name]
-#     return output
     
 def main():
     # shouldn't be running this file
