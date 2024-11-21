@@ -12,7 +12,7 @@ all_ai_ships_sunk: bool = False
 battleships = components.create_battleships()
 
 @app.route('/', methods=['GET'])
-def render_main():
+def root():
     return render_template('main.html', player_board=players['user']['board'])
 
 

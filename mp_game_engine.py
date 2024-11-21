@@ -22,7 +22,7 @@ def generate_attack(board) -> tuple:
     board_size: int = get_board_size(board)
     attack_x: int = random.randint(0, board_size-1)
     attack_y: int = random.randint(0, board_size-1)
-    return (attack_x, attack_y)
+    return attack_x, attack_y
 
 
 def initialise_players_dict(placements_filepath: str ="placement.json") -> dict[str, dict]:
