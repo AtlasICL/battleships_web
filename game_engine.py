@@ -1,16 +1,10 @@
-import components
+import components, console_display
 
 def ship_exists_at_coords(coordinates: tuple, board: list[list[str | None]]) -> bool:
     x, y = coordinates
     if board[y][x] is not None:
         return True
     return False
-
-def display_welcome_message() -> None:
-    print("Welcome to Battleships game")
-
-def display_hit_miss_msg(hit_success: bool) -> None:
-    print("HIT!" if hit_success else "MISS!")
 
 def attack(coordinates: tuple, board: list[list[str | None]], battleships: dict[str, int]) -> bool:
     x, y = coordinates
@@ -34,7 +28,8 @@ def is_all_ships_sunk(ships: dict[str, int]) -> bool:
 
 
 def simple_game_loop() -> None:
-    display_welcome_message()
+    console_display.display_sp_welcome_message()
+    
     board = components.initialise_board()
     ships = components.create_battleships()
     board = components.place_battleships(board, ships, "custom")
@@ -42,14 +37,15 @@ def simple_game_loop() -> None:
     all_ships_sunk: bool = is_all_ships_sunk(ships)
     
     while not all_ships_sunk:
+
         components.print_board(board)
         (x, y) = cli_coordinates_input()
         attack((x, y), board, ships)
+        console_display.display_player_hit((x, y), board)
         all_ships_sunk = is_all_ships_sunk(ships)
 
-    print("game over")
-        
-    
+    console_display.display_sp_game_over()
+
 
 if __name__ == "__main__":
     simple_game_loop()

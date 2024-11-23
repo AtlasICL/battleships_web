@@ -13,6 +13,11 @@ def char_ship_type(ship_in) -> str:
     }
     return abbreviations[ship_in]
 
+def get_board_size(board) -> int:
+    board_size: int = len(board)
+    assert board_size > 0, "BOARD LEN 0"
+    return board_size
+
 def print_board(board: list[list[str | None]]) -> None:
     print(f"BOARD OF SIZE {len(board)}x{len(board[0])}")
     for y in range(len(board)):
