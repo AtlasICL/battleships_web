@@ -74,3 +74,4 @@ By default your ships will be placed according to `placement.json`. **If you wan
 - [ ] Player allowed to repeat attacks?
 - [ ] Random placement algorithm stall check
 - [ ] How does user specify placement algorithm? Modifying source code seems like a bad option
+- [ ] Implement AI difficulty options
