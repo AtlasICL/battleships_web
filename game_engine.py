@@ -26,7 +26,6 @@ def is_all_ships_sunk(ships: dict[str, int]) -> bool:
             all_nil = False
     return all_nil
 
-
 def simple_game_loop() -> None:
     console_display.display_sp_welcome_message()
     

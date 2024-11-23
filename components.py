@@ -1,18 +1,6 @@
 import json
 import random
 
-# this function is for more readable printing of the board
-def char_ship_type(ship_in) -> str:
-    abbreviations = {
-        'Aircraft_Carrier': 'A',
-        'Battleship': 'B',
-        'Cruiser': 'C',
-        'Submarine': 'S',
-        'Destroyer': 'D',
-        None: '-'
-    }
-    return abbreviations[ship_in]
-
 def get_board_size(board) -> int:
     board_size: int = len(board)
     assert board_size > 0, "BOARD LEN 0"
@@ -137,12 +125,21 @@ def can_place_ship(board: list[list], ship_length, start_x, start_y, direction):
                 return False
     return True
 
-    
-def main():
-    # shouldn't be running this file
-    return
-
-if __name__ == "__main__":
-    main()
+def char_ship_type(ship_in) -> str:
+    """
+    This function is for more readable printing of the board.
+    Instead of printing out "Cruiser", it outputs "C" instead,
+    allowing for a "square" printing of the board. It also returns '-'
+    for a None value. 
+    """
+    abbreviations = {
+        'Aircraft_Carrier': 'A',
+        'Battleship': 'B',
+        'Cruiser': 'C',
+        'Submarine': 'S',
+        'Destroyer': 'D',
+        None: '-'
+    }
+    return abbreviations[ship_in]
 
 
