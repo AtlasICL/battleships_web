@@ -66,7 +66,8 @@ To play against the AI opponent through the web interface, run the main.py file:
 python main.py
 ```
 This will give you a local IP address, which you can access using a browser.  
-By default your ships will be placed according to `placement.json`. **If you want to place the ships interactively using the web interface**, please add `/placement` to the end of your URL. Once the ship placement is complete, you can go back to the main game screen  by clicking the "send game" button.
+By default your ships will be placed according to `placement.json`.  
+**If you want to place the ships interactively using the web interface**, please add `/placement` to the end of your URL. Once the ship placement is complete, you can go back to the main game screen  by clicking the "send game" button.
 
 
 # TODO:
