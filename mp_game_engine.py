@@ -3,6 +3,7 @@ import random
 import components, game_engine, console_display
 
 players = {}
+possible_ai_attacks: list[tuple]
 
 def generate_pairs(n: int) -> list[tuple]:
     return [(i, j) for i in range(n) for j in range(n)]
@@ -10,8 +11,6 @@ def generate_pairs(n: int) -> list[tuple]:
 def get_possible_attacks(board: list[list[str | None]]) -> list[tuple]:
     board_size: int = len(board)
     return generate_pairs(board_size)
-
-possible_ai_attacks: list[tuple]
 
 def generate_attack() -> tuple:
     global possible_ai_attacks
@@ -57,7 +56,7 @@ def ai_opponent_game_loop():
         player_hit = game_engine.attack((x, y), players["ai"]["board"], players["ai"]["ships"])
         console_display.display_player_hit((x, y), player_hit)
 
-        (x, y) = generate_attack(players["user"]["board"])
+        (x, y) = generate_attack()
         ai_hit = game_engine.attack((x, y), players["user"]["board"], players["user"]["ships"])
         console_display.display_ai_hit((x, y), ai_hit)
 
