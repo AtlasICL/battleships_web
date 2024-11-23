@@ -4,11 +4,20 @@ import components, game_engine, console_display
 
 players = {}
 
-def generate_attack(board) -> tuple:
-    board_size: int = components.get_board_size(board)
-    attack_x: int = random.randint(0, board_size-1)
-    attack_y: int = random.randint(0, board_size-1)
-    return attack_x, attack_y
+def generate_pairs(n: int) -> list[tuple]:
+    return [(i, j) for i in range(n) for j in range(n)]
+
+def get_possible_attacks(board: list[list[str | None]]) -> list[tuple]:
+    board_size: int = len(board)
+    return generate_pairs(board_size)
+
+possible_ai_attacks: list[tuple]
+
+def generate_attack() -> tuple:
+    global possible_ai_attacks
+    ai_attack = random.choice(possible_ai_attacks)
+    possible_ai_attacks.remove(ai_attack)
+    return ai_attack
 
 def initialise_players_dict(placements_filepath: str ="placement.json") -> dict[str, dict]:
     user_board = components.make_custom_board(placements_filepath)
@@ -28,10 +37,14 @@ def initialise_players_dict(placements_filepath: str ="placement.json") -> dict[
     }
     return players
 
-def ai_opponent_game_loop():
 
+def ai_opponent_game_loop():
     global players
+    global possible_ai_attacks
+
     players = initialise_players_dict()
+
+    possible_ai_attacks = get_possible_attacks(players["user"]["board"])
 
     console_display.display_mp_welcome()
 
@@ -58,8 +71,6 @@ def ai_opponent_game_loop():
         console_display.display_ai_win_msg()
     elif all_ai_ships_sunk:
         console_display.display_player_win_msg()
-
-    
 
 def main():
     ai_opponent_game_loop()
