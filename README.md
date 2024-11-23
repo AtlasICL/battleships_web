@@ -5,9 +5,9 @@
 # Features
 
 This Battleships game supports the following:
-- 1. Playing singleplayer, through the console
-- 2. Playing against an AI opponent, through the console
-- 3. Playing against AI opponent, through a web interface
+- Playing singleplayer, through the console
+- Playing against an AI opponent, through the console
+- Playing against AI opponent, through a web interface
 
 This game also supports 3 algorithms for placing your ships:
 - "simple", which places your ships horizontally, starting from the top left (0,0)
