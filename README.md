@@ -3,6 +3,10 @@
 
 ---
 
+NOTES
+
+should generate attack take in the board?? (is it against what is outlined in the doc?)
+
 # Features
 
 ### 1. Singleplayer
