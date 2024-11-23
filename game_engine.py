@@ -18,7 +18,6 @@ def attack(coordinates: tuple, board: list[list[str | None]], battleships: dict[
     if hit_success:
         battleships[board[y][x]] -= 1
         board[y][x] = None
-    display_hit_miss_msg(hit_success)
     return hit_success
 
 def cli_coordinates_input() -> tuple:

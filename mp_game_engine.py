@@ -10,13 +10,24 @@ def get_board_size(board) -> int:
     return board_size
 
 def display_mp_welcome() -> None:
+    print("--------")
     print("Welcome to battleships game")
+    print("You will be asked to enter the coordinates for your attack")
+    print("You will then be told whether you got a hit or a miss")
+    print("The AI will then take its turn, and you will be told whether it got a hit")
+    print("--GOOD LUCK--")
 
 def display_player_win_msg() -> None:
     print("Player wins!")
 
 def display_ai_win_msg() -> None:
     print("Computer wins!")
+
+def display_player_hit(player_attack_coords: tuple, player_hit: bool) -> None:
+    print(f"Your attack at {player_attack_coords} {"HIT" if player_hit else "MISS"}")
+
+def display_ai_hit(ai_attack_coords: tuple, ai_hit: bool) -> None:
+    print(f"AI attacked at {ai_attack_coords} and {"HIT" if ai_hit else "MISSED"}")
 
 def generate_attack(board) -> tuple:
     board_size: int = get_board_size(board)
@@ -50,27 +61,21 @@ def ai_opponent_game_loop():
 
     display_mp_welcome()
 
-    # TODO: dont show the user the AI board
-    # just say hit or miss
-
-    # Make sure when HIT or MISS appear, we know whether its for the AI 
-    # or for the player
-    # alternatively just don't tell the player whether the AI got a hit
-    # they can see it on their board anyways
-
     all_user_ships_sunk = False
     all_ai_ships_sunk = False
 
     while not all_user_ships_sunk and not all_ai_ships_sunk:
 
         (x, y) = game_engine.cli_coordinates_input()
-        game_engine.attack((x, y), players["ai"]["board"], players["ai"]["ships"])
+        player_hit = game_engine.attack((x, y), players["ai"]["board"], players["ai"]["ships"])
+        display_player_hit((x, y), player_hit)
 
         (x, y) = generate_attack(players["user"]["board"])
-        game_engine.attack((x, y), players["user"]["board"], players["user"]["ships"])
+        ai_hit = game_engine.attack((x, y), players["user"]["board"], players["user"]["ships"])
+        display_ai_hit((x, y), ai_hit)
 
+        print("YOUR BOARD STATE:")
         components.print_board(players["user"]["board"])
-        components.print_board(players["ai"]["board"])
 
         all_user_ships_sunk = game_engine.is_all_ships_sunk(players["user"]["ships"])
         all_ai_ships_sunk = game_engine.is_all_ships_sunk(players["ai"]["ships"])
@@ -80,7 +85,6 @@ def ai_opponent_game_loop():
     elif all_ai_ships_sunk:
         display_player_win_msg()
 
-    
     
 
 def main():
