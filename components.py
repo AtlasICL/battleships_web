@@ -132,9 +132,7 @@ def can_place_ship(board: list[list], ship_length, start_x, start_y, direction):
 def char_ship_type(ship_in) -> str:
     """
     This function is for more readable printing of the board.
-    Instead of printing out "Cruiser", it outputs "C" instead,
-    allowing for a "square" printing of the board. It also returns '-'
-    for a None value. 
+    It also returns '-' for a None value. 
     """
     abbreviations = {
         'Aircraft_Carrier': 'A',
