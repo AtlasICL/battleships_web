@@ -3,7 +3,7 @@ import random
 import components, game_engine, console_display
 
 players = {}
-possible_ai_attacks: list[tuple]
+possible_ai_attacks: list[tuple] = [(0,0)]
 
 def generate_pairs(n: int) -> list[tuple]:
     return [(i, j) for i in range(n) for j in range(n)]
