@@ -13,6 +13,7 @@ This game also supports 3 algorithms for placing your ships:
 - "simple", which places your ships horizontally, starting from the top left (0,0)
 - "random", which places your ships in random positions
 - "custom", which allows you to place your ships in a custom layout
+- 
 Additionally, if playing using the web interface, there is an interactive placement option, please see [below](#3-against-ai-opponent---web-interface)  
 
 ---
