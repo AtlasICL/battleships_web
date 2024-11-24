@@ -96,8 +96,11 @@ def make_random_board() -> list[list[str | None]]:
     return board
 
 def place_ship(board, ship_length, ship_name) -> None:
-    placed = False
-    while not placed:
+    placed: bool = False
+    MAX_ATTEMPTS: int = 100
+    attempt_counter: int = 0
+    while not placed and attempt_counter < MAX_ATTEMPTS:
+        attempt_counter += 1
         start_y = random.randint(0, len(board)-1)
         start_x = random.randint(0, len(board)-1)
         direction = random.choice(['h', 'v'])
@@ -109,6 +112,7 @@ def place_ship(board, ship_length, ship_name) -> None:
                 for i in range(ship_length):
                     board[start_y + i][start_x] = ship_name
             placed = True
+            attempt_counter = 0
 
 def can_place_ship(board: list[list], ship_length, start_x, start_y, direction):
     if direction == 'h':
