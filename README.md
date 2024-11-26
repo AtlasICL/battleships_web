@@ -72,6 +72,7 @@ By default your ships will be placed according to `placement.json`.
 
 
 # TODO:
+- [ ] !!! generate_attack() does not work anymore!
 - [x] AI does not repeat attacks
 - [ ] Player allowed to repeat attacks?
 - [x] Random placement algorithm stall check
