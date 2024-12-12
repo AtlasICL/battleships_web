@@ -68,11 +68,10 @@ This will give you a local IP address, which you can access using a browser.
 By default your ships will be placed according to `placement.json`.  
 **If you want to place the ships interactively using the web interface**, please add `/placement` to the end of your URL. Once the ship placement is complete, you can go back to the main game screen  by clicking the "send game" button.
 
+---
 
-# TODO:
-- [ ] !!! generate_attack() does not work anymore!
-- [x] AI does not repeat attacks
-- [ ] Player allowed to repeat attacks?
-- [x] Random placement algorithm stall check
-- [ ] How does user specify placement algorithm? Modifying source code seems like a bad option
-- [ ] Implement AI difficulty options (optional)
+# LICENSE
+
+All Rights Reserved
+
+Copyright Emre Acarsoy 2024
