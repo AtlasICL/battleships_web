@@ -20,8 +20,6 @@ Additionally, if playing using the web interface, there is an interactive placem
 
 # Build
 
-**FOR ALL VERSIONS:**  
-
 Please specify which ships you would like to have in the game, using the `battleships.txt` file.  
 Here is an example battleships.txt file:
 ```
