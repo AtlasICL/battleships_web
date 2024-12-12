@@ -1,10 +1,12 @@
 from flask import Flask, render_template, jsonify, request
 
-import components, game_engine, mp_game_engine
+import components, game_engine, mp_game_engine, ai_attacker
 
 app = Flask(__name__)
 
 players = mp_game_engine.initialise_players_dict()
+
+AIAttacker = ai_attacker.AIAttacker(len(players['ai']['board']))
 
 all_user_ships_sunk: bool = False
 all_ai_ships_sunk: bool = False
@@ -29,19 +31,19 @@ def placement_interface():
 @app.route('/attack', methods=['GET'])
 def attack():
 
+    global players
+    
     # fetching user input coordinates
     x = int(request.args.get('x'))
     y = int(request.args.get('y'))
 
-    
-    global players
 
     all_user_ships_sunk = game_engine.is_all_ships_sunk(players["user"]["ships"])
     all_ai_ships_sunk = game_engine.is_all_ships_sunk(players["ai"]["ships"])
 
     if not all_user_ships_sunk and not all_ai_ships_sunk:
         hit_success = game_engine.attack((x, y), players["ai"]["board"], players["ai"]["ships"])
-        ai_attack = mp_game_engine.generate_attack(players["user"]["board"])
+        ai_attack = AIAttacker.get_attack()
 
         return jsonify({'hit': hit_success,
             'AI_Turn': ai_attack
